@@ -80,13 +80,13 @@ function ApiWrapper<TData = unknown, TError = Error, TVariables = unknown>({
     }
 
     else {
-        const { mutate, isPending: isLoading, isError, error, data } = result as UseMutationResult<TData, TError, TVariables>;
+        const { mutate, isPending: isLoading, isError, error, data, isSuccess } = result as UseMutationResult<TData, TError, TVariables>;
 
         return (
             <>
                 {children({ mutate, isLoading, isError, error: error || null, data })}
                 {isError && error && renderError(error)}
-                {!isLoading && !isError && successMessage}
+                {!isLoading && !isError && isSuccess && successMessage}
             </>
         );
     }
